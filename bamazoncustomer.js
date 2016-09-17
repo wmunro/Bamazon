@@ -29,15 +29,15 @@ connection.query('SELECT * FROM products', function(err, rows){
   }
   console.log("\nWhat would you like to order?\nEnter the item ID number and a quantity.");
 	prompt.start();
-	prompt.get(['ItemID', 'quantity'], function(err, order){
+	prompt.get(['itemID', 'quantity'], function(err, order){
 		ID = order.itemID;
 		quantity = order.quantity;
 		prompt.stop();
-		connection.query('SELECT * FROM products WHERE ItemID = "' + ID + '"', function(err, product){
+		connection.query('SELECT * FROM products WHERE itemID = "' + ID + '"', function(err, product){
   		if(product[0].stockquantity >= quantity)
   		{
   			var newQuant = product[0].stockquantity - quantity;
-  			connection.query('UPDATE products SET StockQuantity = "' + newQuant + '" WHERE ItemID = "' + ID + '"', function(err, result){
+  			connection.query('UPDATE products SET stockquantity = "' + newQuant + '" WHERE itemID = "' + ID + '"', function(err, result){
   				if(err)
   				{
   					throw err;
